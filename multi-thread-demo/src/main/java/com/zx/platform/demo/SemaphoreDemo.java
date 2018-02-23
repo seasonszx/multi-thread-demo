@@ -9,14 +9,14 @@ import java.util.concurrent.Semaphore;
  * @author Administrator
  * demo：信号量
  * 应用场景：多个线程占用固定个数资源时候的实现
- * 业务需求：购票
+ * 业务需求：购票（10个用户在2个窗口买票）
  */
 public class SemaphoreDemo {
 	
 	class Task implements Runnable{
 		
 		private Semaphore semaphore; //信号量
-		private int user; //第几个用户
+		private int user; //第几个访问线程
 
 		public Task(Semaphore semaphore, int user) {
 			super();
@@ -46,7 +46,7 @@ public class SemaphoreDemo {
 	public void exec() {
 		// 定义信号量个数,2代表定义两个资源信号量
 		Semaphore semaphore = new Semaphore(2);
-		// 定义用户个数
+		// 定义访问线程总个数
 		int user = 10;
 		// 定义线程池
 		ExecutorService threadPool = Executors.newCachedThreadPool();
